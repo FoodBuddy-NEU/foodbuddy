@@ -1,82 +1,75 @@
 import { useLocalSearchParams } from "expo-router";
 import { View, Text, FlatList } from "react-native";
-import { MOCK_RESTAURANTS } from "../../lib/mock";
+import restaurants from "@/lib/restaurants.json";
+
+type Restaurant = {
+  id: string;
+  name: string;
+  distanceMiles: number;
+  priceLevel: 1 | 2 | 3 | 4;
+  tags: string[];
+  discount: null | { percent: number; appliesTo: string };
+  menus: { id: string; name: string; price: number }[];
+};
 
 export default function RestaurantDetailScreen() {
   const { id } = useLocalSearchParams<{ id: string }>();
-  const data = MOCK_RESTAURANTS.find((r) => r.id === id);
+  const data = (restaurants as Restaurant[]).find((r) => r.id === id);
 
-  if (!data)
+  if (!data) {
     return (
       <View style={{ padding: 16 }}>
         <Text>Not found</Text>
       </View>
     );
+  }
+
+  const priceToDollarSigns = (level: number) => "$".repeat(Math.max(1, Math.min(4, level)));
 
   return (
     <View style={{ padding: 16, gap: 12 }}>
       <Text style={{ fontSize: 22, fontWeight: "700" }}>{data.name}</Text>
+
       <Text style={{ color: "#666" }}>
-        {`${data.foodTypes?.length ? data.foodTypes.join(", ") : "N/A"} • ${data.priceRange ?? "N/A"} • ⭐ ${data.rating ?? "-"}`}
+        {`${data.distanceMiles.toFixed(1)} mi • ${priceToDollarSigns(data.priceLevel)}`}
       </Text>
 
-      <Text style={{ fontSize: 16, fontWeight: "600", marginTop: 8 }}>
-        Deals
-      </Text>
-      {data.deals?.length ? data.deals.map(d => (
-        <View key={d.id} style={{ borderWidth: 1, borderColor: "#eee", borderRadius: 10, padding: 10, marginTop: 6 }}>
-          <Text style={{ fontWeight: "600" }}>{d.title}</Text>
-          {d.description ? <Text>{d.description}</Text> : null}
-          {(d.validFrom || d.validTo) ? (
-            <Text style={{ color: "#666", marginTop: 2 }}>
-              {`${d.validFrom ? ` ${d.validFrom}` : ""}${d.validFrom && d.validTo ? " – " : d.validTo ? " until " : ""}${d.validTo ?? ""}`}
-            </Text>
-          ) : null}
-        </View>
-      )) : <Text style={{ color: "#666" }}>There is no deal avaliable at the moment</Text>}
+      {/* Tags */}
+      {data.tags?.length ? (
+        <Text style={{ marginTop: 4 }}>{data.tags.join(" • ")}</Text>
+      ) : null}
 
-      <Text style={{ fontSize: 16, fontWeight: "600", marginTop: 12 }}>
-        Menu
+      {/* Discount */}
+      <Text style={{ fontSize: 16, fontWeight: "600", marginTop: 12 }}>Discount</Text>
+      <Text style={{ color: "#333" }}>
+        {data.discount ? `${data.discount.percent}% off ${data.discount.appliesTo}` : "No discount"}
       </Text>
-      {data.menus?.map((m) => (
-        <View key={m.id} style={{ marginTop: 8 }}>
-          <Text style={{ fontWeight: "600" }}>{m.title}</Text>
-          <FlatList
-            data={m.items}
-            keyExtractor={(i) => i.id}
-            ItemSeparatorComponent={() => <View style={{ height: 6 }} />}
-            renderItem={({ item }) => (
-              <View
-                style={{
-                  flexDirection: "row",
-                  justifyContent: "space-between",
-                }}
-              >
-                <Text>
-                  {item.name}
-                </Text>
-                <Text>${item.price.toFixed(2)}</Text>
-              </View>
-            )}
-          />
-        </View>
-      ))}
 
-      {/* Reviews section */}
-      <Text style={{ fontSize: 16, fontWeight: "600", marginTop: 12 }}>Reviews</Text>
-      {data.reviews?.length ? (
-        data.reviews.map((rev, idx) => (
-          <View
-            key={`${rev.userName}-${idx}`}
-            style={{ borderWidth: 1, borderColor: "#eee", borderRadius: 10, padding: 10, marginTop: 6 }}
-          >
-            <Text style={{ fontWeight: "600" }}>{rev.userName}</Text>
-            <Text style={{ color: "#666" }}>{`⭐ ${rev.rating}`}</Text>
-            <Text style={{ marginTop: 4 }}>{rev.comment}</Text>
-          </View>
-        ))
+      {/* Menu */}
+      <Text style={{ fontSize: 16, fontWeight: "600", marginTop: 12 }}>Menu</Text>
+      {data.menus?.length ? (
+        <FlatList
+          data={data.menus}
+          keyExtractor={(i) => i.id}
+          ItemSeparatorComponent={() => <View style={{ height: 6 }} />}
+          renderItem={({ item }) => (
+            <View
+              style={{
+                flexDirection: "row",
+                justifyContent: "space-between",
+                borderWidth: 1,
+                borderColor: "#eee",
+                borderRadius: 10,
+                padding: 10,
+              }}
+            >
+              <Text>{item.name}</Text>
+              <Text>${item.price.toFixed(2)}</Text>
+            </View>
+          )}
+        />
       ) : (
-        <Text style={{ color: "#666" }}>No reviews</Text>
+        <Text style={{ color: "#666" }}>No menu items</Text>
       )}
     </View>
   );

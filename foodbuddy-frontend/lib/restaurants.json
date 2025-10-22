@@ -1,0 +1,106 @@
+[
+  {
+    "id": "hanami-sushi",
+    "name": "Hanami Sushi",
+    "distanceMiles": 1.2,
+    "priceLevel": 2,
+    "tags": ["solo", "Japanese", "sushi", "popular"],
+    "discount": { "percent": 10, "appliesTo": "everything" },
+    "menus": [
+      { "id": "m1", "name": "Salmon Nigiri (2pc)", "price": 5.0 },
+      { "id": "m2", "name": "Tuna Roll", "price": 6.5 },
+      { "id": "m3", "name": "Miso Soup", "price": 3.0 }
+    ]
+  },
+  {
+    "id": "golden-wok",
+    "name": "Golden Wok",
+    "distanceMiles": 3.5,
+    "priceLevel": 1,
+    "tags": ["group", "Chinese", "noodles"],
+    "discount": null,
+    "menus": [
+      { "id": "m1", "name": "Beef Chow Fun", "price": 12.0 },
+      { "id": "m2", "name": "Mapo Tofu", "price": 10.0 },
+      { "id": "m3", "name": "Wonton Soup", "price": 5.0 }
+    ]
+  },
+  {
+    "id": "la-fiammata",
+    "name": "La Fiammata",
+    "distanceMiles": 2.1,
+    "priceLevel": 3,
+    "tags": ["group", "Italian", "pizza", "popular"],
+    "discount": { "percent": 15, "appliesTo": "drinks" },
+    "menus": [
+      { "id": "m1", "name": "Margherita Pizza", "price": 14.0 },
+      { "id": "m2", "name": "Spaghetti Carbonara", "price": 16.0 },
+      { "id": "m3", "name": "Tiramisu", "price": 7.0 }
+    ]
+  },
+  {
+    "id": "taco-libre",
+    "name": "Taco Libre",
+    "distanceMiles": 0.7,
+    "priceLevel": 1,
+    "tags": ["solo", "Mexican", "tacos", "popular"],
+    "discount": { "percent": 10, "appliesTo": "everything" },
+    "menus": [
+      { "id": "m1", "name": "Al Pastor Taco", "price": 3.5 },
+      { "id": "m2", "name": "Carne Asada Taco", "price": 3.8 },
+      { "id": "m3", "name": "Horchata", "price": 3.0 }
+    ]
+  },
+  {
+    "id": "bistro-belle",
+    "name": "Bistro Belle",
+    "distanceMiles": 4.6,
+    "priceLevel": 4,
+    "tags": ["group", "French", "date-night"],
+    "discount": null,
+    "menus": [
+      { "id": "m1", "name": "French Onion Soup", "price": 9.0 },
+      { "id": "m2", "name": "Steak Frites", "price": 28.0 },
+      { "id": "m3", "name": "Crème Brûlée", "price": 8.0 }
+    ]
+  },
+  {
+    "id": "bombay-spice",
+    "name": "Bombay Spice",
+    "distanceMiles": 5.0,
+    "priceLevel": 2,
+    "tags": ["group", "Indian", "vegetarian"],
+    "discount": { "percent": 20, "appliesTo": "drinks" },
+    "menus": [
+      { "id": "m1", "name": "Palak Paneer", "price": 13.0 },
+      { "id": "m2", "name": "Chicken Tikka Masala", "price": 15.0 },
+      { "id": "m3", "name": "Garlic Naan", "price": 3.5 }
+    ]
+  },
+  {
+    "id": "kebab-express",
+    "name": "Kebab Express",
+    "distanceMiles": 2.9,
+    "priceLevel": 2,
+    "tags": ["solo", "Mediterranean", "halal"],
+    "discount": null,
+    "menus": [
+      { "id": "m1", "name": "Chicken Shawarma Wrap", "price": 10.0 },
+      { "id": "m2", "name": "Lamb Kebab Plate", "price": 14.0 },
+      { "id": "m3", "name": "Falafel (6pc)", "price": 6.0 }
+    ]
+  },
+  {
+    "id": "green-bowl",
+    "name": "Green Bowl",
+    "distanceMiles": 1.8,
+    "priceLevel": 2,
+    "tags": ["solo", "Healthy", "salads", "popular"],
+    "discount": { "percent": 10, "appliesTo": "everything" },
+    "menus": [
+      { "id": "m1", "name": "Build-Your-Own Salad", "price": 11.0 },
+      { "id": "m2", "name": "Quinoa Bowl", "price": 12.0 },
+      { "id": "m3", "name": "Iced Green Tea", "price": 3.0 }
+    ]
+  }
+]

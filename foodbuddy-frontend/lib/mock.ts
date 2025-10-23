@@ -13,8 +13,14 @@ export const MOCK_RESTAURANTS: RestaurantDetail[] = [
         id: "d1",
         title: "Student 10% Off",
         description: "Valid with student ID",
-        validFrom: "Oct 10",
-        validTo: "Oct 23",
+        validFrom: "2025-10-10",
+        validTo: "2025-10-23",
+        redemptionCode: "STU10OFF",
+        redemptionMethod: 'code',
+        studentOnly: true,
+        availability: { dineIn: true, takeout: false, delivery: false, daysOfWeek: ['Mon','Tue','Wed','Thu','Fri'], timeRange: { start: '11:00', end: '15:00' } },
+        finePrint: 'Valid for current university students only. Present a valid student ID at checkout. Not combinable with other offers.',
+        status: 'active',
       },
     ],
     menus: [
@@ -87,7 +93,7 @@ export const MOCK_RESTAURANTS: RestaurantDetail[] = [
     foodTypes: ["Japanese"],
     tags: ["popular", "date-night"],
     deals: [
-      { id: "d4", title: "Free Miso Soup", description: "With any sushi set" }
+      { id: "d4", title: "Free Miso Soup", description: "With any sushi set", redemptionMethod: 'in-person', availability: { dineIn: true, takeout: false, delivery: false }, finePrint: 'One free miso soup per sushi set. Not valid with other promotions.', status: 'active' }
     ],
     menus: [
       {
@@ -108,7 +114,7 @@ export const MOCK_RESTAURANTS: RestaurantDetail[] = [
     foodTypes: ["Italian"],
     tags: ["family-friendly"],
     deals: [
-      { id: "d5", title: "Kids Eat Free", description: "With adult entree", validFrom: "Nov 1", validTo: "Nov 30" }
+      { id: "d5", title: "Kids Eat Free", description: "With adult entree", validFrom: "2025-11-01", validTo: "2025-11-30", availability: { dineIn: true }, finePrint: 'One free kids meal (12 and under) per adult entree. Valid for dine-in only.', status: 'scheduled' }
     ],
     menus: [
       {

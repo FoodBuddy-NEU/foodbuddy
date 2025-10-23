@@ -1,4 +1,4 @@
-import { useLocalSearchParams } from "expo-router";
+import { useLocalSearchParams, Link } from "expo-router";
 import { View, Text, FlatList } from "react-native";
 import { MOCK_RESTAURANTS } from "../../lib/mock";
 
@@ -24,15 +24,17 @@ export default function RestaurantDetailScreen() {
         Deals
       </Text>
       {data.deals?.length ? data.deals.map(d => (
-        <View key={d.id} style={{ borderWidth: 1, borderColor: "#eee", borderRadius: 10, padding: 10, marginTop: 6 }}>
-          <Text style={{ fontWeight: "600" }}>{d.title}</Text>
-          {d.description ? <Text>{d.description}</Text> : null}
-          {(d.validFrom || d.validTo) ? (
-            <Text style={{ color: "#666", marginTop: 2 }}>
-              {`${d.validFrom ? ` ${d.validFrom}` : ""}${d.validFrom && d.validTo ? " – " : d.validTo ? " until " : ""}${d.validTo ?? ""}`}
-            </Text>
-          ) : null}
-        </View>
+  <Link key={d.id} href={{ pathname: '/deal/[id]', params: { id: d.id } }}>
+          <View style={{ borderWidth: 1, borderColor: "#eee", borderRadius: 10, padding: 10, marginTop: 6 }}>
+            <Text style={{ fontWeight: "600" }}>{d.title}</Text>
+            {d.description ? <Text>{d.description}</Text> : null}
+            {(d.validFrom || d.validTo) ? (
+              <Text style={{ color: "#666", marginTop: 2 }}>
+                {`${d.validFrom ? ` ${d.validFrom}` : ""}${d.validFrom && d.validTo ? " – " : d.validTo ? " until " : ""}${d.validTo ?? ""}`}
+              </Text>
+            ) : null}
+          </View>
+        </Link>
       )) : <Text style={{ color: "#666" }}>There is no deal avaliable at the moment</Text>}
 
       <Text style={{ fontSize: 16, fontWeight: "600", marginTop: 12 }}>
